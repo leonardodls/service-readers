@@ -14,9 +14,7 @@ class ItemsAPI{
         try{
           let promise =  this.httpModule.get(this.hostUrl + '/items/' + itemId + '?denormalize=true&mode=undefined');
           return new Promise(function(resolve, reject){
-              promise.then( function(response){
-                return JSON.parse(response.responseText)
-              });
+              promise.then( response => resolve(JSON.parse(response.responseText)));
           });
 
         }

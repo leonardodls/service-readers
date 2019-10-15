@@ -3,13 +3,15 @@
 class ItemsAPI{
 
     hostUrl;
+    httpModule;
 
-    init(hostUrl){
+    init(hostUrl, httpModule){
         this.hostUrl = hostUrl;
+        this.httpModule = httpModule;
     }
 
     getItem(itemId){
-        // return this.httpModule.get(this.hostUrl + '/items/' + itemId);
+        var abc = this.httpModule.get(this.hostUrl + '/items/' + itemId);
         return this.getItemLocal(itemId);
     }
 

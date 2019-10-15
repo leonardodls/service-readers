@@ -12,8 +12,11 @@ class ItemsAPI{
 
     getItem(itemId){
         try{
-          let resposne =  this.httpModule.get(this.hostUrl + '/items/' + itemId + '?denormalize=true&mode=undefined');
-          return JSON.parse(resposne.resposneText);
+          let promise =  this.httpModule.get(this.hostUrl + '/items/' + itemId + '?denormalize=true&mode=undefined');
+          return new Promise(function(resolve, reject){
+            promise.then(respose => JSON.parse(resposne.resposneText));
+          });
+          
         }
         catch(e){
           //TODO:  send appropriate error

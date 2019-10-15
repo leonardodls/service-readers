@@ -11,8 +11,8 @@ class ItemsAPI{
     }
 
     getItem(itemId){
-        var abc = this.httpModule.get(this.hostUrl + '/items/' + itemId);
-        return this.getItemLocal(itemId);
+        return this.httpModule.get(this.hostUrl + '/items/' + itemId + '?denormalize=true&mode=undefined');
+        // return this.getItemLocal(itemId);
     }
 
 

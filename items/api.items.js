@@ -4,19 +4,23 @@ class ItemsAPI{
 
     hostUrl;
     httpModule;
+    authSignature;
 
-    init(hostUrl, httpModule){
+    init(hostUrl, httpModule, authSignature){
         this.hostUrl = hostUrl;
         this.httpModule = httpModule;
+        this.authSignature = authSignature;
     }
 
     getItem(itemId){
         try{
-          let promise =  this.httpModule.get(this.hostUrl + '/items/' + itemId + '?denormalize=true&mode=undefined');
+          let options = {
+            headers : this.authSignature
+          };
+          let promise =  this.httpModule.get(this.hostUrl + '/items/' + itemId + '?denormalize=true&mode=undefined', options);
           return new Promise(function(resolve, reject){
               promise.then( response => resolve(JSON.parse(response.responseText)));
           });
-
         }
         catch(e){
           //TODO:  send appropriate error
@@ -26,7 +30,52 @@ class ItemsAPI{
 
 
     postItem(itemJson){
-        return this.httpModule.post(this.hostUrl + '/items', itemJson);
+      try{
+        let options = {
+          data: itemJson,
+          headers : this.authSignature
+        };
+        let promise =  this.httpModule.post(this.hostUrl + '/items', options);
+        return new Promise(function(resolve, reject){
+            promise.then( response => resolve(JSON.parse(response.responseText)));
+        });
+      }
+      catch(e){
+        //TODO:  send appropriate error
+      }
+    }
+
+    updateItem(itemId, itemJson){
+      try{
+        let options = {
+          data: itemJson,
+          headers : this.authSignature
+        };
+        let promise =  this.httpModule.put(this.hostUrl + '/items/' + itemId, options);
+        return new Promise(function(resolve, reject){
+            promise.then( response => resolve(JSON.parse(response.responseText)));
+        });
+
+      }
+      catch(e){
+        //TODO:  send appropriate error
+      }
+    }
+
+    deleteItem(itemId){
+      try{
+        let options = {
+          headers : this.authSignature
+        };
+        let promise =  this.httpModule.delete(this.hostUrl + '/items/' + itemId, options);
+        return new Promise(function(resolve, reject){
+            promise.then( response => resolve(JSON.parse(response.responseText)));
+        });
+
+      }
+      catch(e){
+        //TODO:  send appropriate error
+      }
     }
 
     getItemLocal(itemId) {

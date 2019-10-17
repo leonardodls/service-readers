@@ -6,32 +6,30 @@
 
     hostUrl;
     httpModule;
-    authSignature;
 
     constructor(){
       LeonardoApp.Services.register("items", this);
     }
 
-    init(hostUrl, httpModule, authSignature){
-        this.hostUrl = hostUrl;
-        this.httpModule = httpModule;
-        this.authSignature = authSignature;
+    init(hostUrl, httpModule){
+      this.hostUrl = hostUrl;
+      this.httpModule = httpModule;
     }
 
     getItem(itemId){
-        try{
-          let options = {
-            headers : this.authSignature
-          };
-          let promise =  this.httpModule.get(this.hostUrl + '/items/' + itemId + '?denormalize=true&mode=undefined', options);
-          return new Promise(function(resolve, reject){
-              promise.then( response => resolve(JSON.parse(response.responseText)));
-          });
-        }
-        catch(e){
-          //TODO:  send appropriate error
-          return this.getItemLocal(itemId);
-        }
+      try{
+        let options = {
+          headers : this.authSignature
+        };
+        let promise =  this.httpModule.get(this.hostUrl + '/items/' + itemId + '?denormalize=true&mode=undefined', options);
+        return new Promise(function(resolve, reject){
+            promise.then( response => resolve(JSON.parse(response.responseText)));
+        });
+      }
+      catch(e){
+        //TODO:  send appropriate error
+        return this.getItemLocal(itemId);
+      }
     }
 
 

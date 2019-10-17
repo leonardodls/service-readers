@@ -6,7 +6,7 @@
         authSignature;
 
         constructor(){
-            LeonardoApp.Services.register("items", this);
+            LeonardoApp.Services.register("attempts", this);
         }
 
         init(hostUrl, httpModule, authSignature){

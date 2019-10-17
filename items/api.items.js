@@ -1,10 +1,16 @@
 // import { BaseApi } from "./../base/api.base";
 
-class ItemsAPI{
+
+(function () {
+  class ItemsAPI{
 
     hostUrl;
     httpModule;
     authSignature;
+
+    constructor(){
+      LeonardoApp.Services.register("items", this);
+    }
 
     init(hostUrl, httpModule, authSignature){
         this.hostUrl = hostUrl;
@@ -84,11 +90,10 @@ class ItemsAPI{
         })
     }
 
-}
+  }
+  export default new ItemsAPI();
 
-export default new ItemsAPI();
-
-var itemJson = {
+  var itemJson = {
     "meta": {
       "tags": {
         "custom": []
@@ -2916,3 +2921,7 @@ var itemJson = {
     "leonardoId": "leo-leonardo-dev-2227",
     "__v": 0
   };
+})();
+
+
+

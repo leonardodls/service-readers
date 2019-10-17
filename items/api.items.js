@@ -91,7 +91,8 @@
     }
 
   }
-  export default new ItemsAPI();
+
+  new ItemsAPI();
 
   var itemJson = {
     "meta": {

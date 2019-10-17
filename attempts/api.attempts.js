@@ -1,14 +1,27 @@
-import { BaseApi } from "./../base/api.base";
-class AttemptsAPI extends BaseApi {
+(function () {
+    class AttemptsAPI {
 
-    getAttemptsData( itemId, launchId, callback ){
+        hostUrl;
+        httpModule;
+        authSignature;
 
+        constructor(){
+            LeonardoApp.Services.register("items", this);
+        }
+
+        init(hostUrl, httpModule, authSignature){
+            this.hostUrl = hostUrl;
+            this.httpModule = httpModule;
+            this.authSignature = authSignature;
+        }
+
+        getAttemptsData(itemId){
+        }
+
+        saveState(){
+
+        }
     }
 
-    saveState( itemId, launchId, callback ){
-
-    }
-
-}
-
-export default new AttemptsAPI();
+    new AttemptsAPI();
+})();
